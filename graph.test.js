@@ -135,14 +135,16 @@ describe("DFS", function() {
     graph.addEdge(R, T);
     graph.addEdge(W, T);
 
-    var result = JSON.stringify(graph.depthFirstSearch(S));
-    var validResult =
-      result ===
-        JSON.stringify(["S", "U", "V", "W", "T", "R", "Q", "Y", "X", "P"]) ||
-      result ===
-        JSON.stringify(["S", "P", "X", "U", "V", "W", "Y", "R", "Q", "T"]);
+    const resultIterative = JSON.stringify(graph.depthFirstSearch(S));
+    const resultRecursive = JSON.stringify(graph.depthFirstRecursive(S));
 
-    expect(validResult).toBe(true);
+    const validResults = [
+        JSON.stringify(["S", "U", "V", "W", "T", "R", "Q", "Y", "X", "P"]),
+        JSON.stringify(["S", "P", "X", "U", "V", "W", "Y", "R", "Q", "T"])
+    ];
+
+    expect(validResults).toContain(resultIterative);
+    expect(validResults).toContain(resultRecursive);
   });
 });
 

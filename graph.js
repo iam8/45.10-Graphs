@@ -73,7 +73,21 @@ class Graph {
 
     // this function returns an array of Node values using BFS
     breadthFirstSearch(start) {
+        const toVisitQueue = [start];
+        const visited = new Set();
 
+        while (toVisitQueue.length) {
+            const current = toVisitQueue.shift();
+            visited.add(current.value);
+
+            for (let adj of current.adjacent) {
+                if (!visited.has(adj.value) && !toVisitQueue.includes(adj)) {
+                    toVisitQueue.push(adj);
+                }
+            }
+        }
+
+        return [...visited];
     }
 }
 

@@ -71,6 +71,28 @@ class Graph {
         return [...visited];
     }
 
+    // Recursive implementation of depthFirstSearch() method above, just for fun. This method feels
+    // more natural to me and easier because you don't have to keep track of a 'toVisit' stack (or
+    // queue).
+    depthFirstRecursive(start) {
+        if (!start) return [];
+
+        const visited = new Set();
+
+        const dfsHelper = (node) => {
+            visited.add(node.value);
+
+            for (let adj of node.adjacent) {
+                if (!visited.has(adj.value)) {
+                    dfsHelper(adj);
+                }
+            }
+        }
+
+        dfsHelper(start);
+        return [...visited];
+    }
+
     // this function returns an array of Node values using BFS
     breadthFirstSearch(start) {
         const toVisitQueue = [start];
